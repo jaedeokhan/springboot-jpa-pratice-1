@@ -7,18 +7,31 @@
   - Ex) 주문(Order)과 주문상품(OrderItem) 연관관계 
       - OrderItem에서 FK를 가지고 있기에 주인!
 ```java
-// OrderItem가 주인이기에 JoinColumn으로 연결
+public class OrderItem {
+	```
+	
+	// OrderItem이 주인이기에 JoinColumn으로 연결
+	
+	@ManyToOne
+	@JoinColumn(name = "item_id")
+	private Item item;
 
-@ManyToOne
-@JoinColumn(name = "item_id")
-private Item item;
+	```
+}
 ```
 
 ```java
-// Order는 연관관계의 거울이기에 mappedBy 작성!
+public class Order {
 
-@OneToMany(mappedBy = "orderItem")
-private List<OrderItem> orderItems = new ArrayList<>();
+	```
+
+	// Order는 연관관계의 거울이기에 mappedBy 작성!
+	
+	@OneToMany(mappedBy = "orderItem")
+	private List<OrderItem> orderItems = new ArrayList<>();
+	
+	```
+}
 ```
 
 2. 값 타입(임베디드 타입) 사용
