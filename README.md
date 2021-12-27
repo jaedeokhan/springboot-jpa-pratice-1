@@ -6,18 +6,20 @@
   - DB에서 외래키(FK)를 가지는 쪽이 연관관계의 주인으로 사용하는 것을 권장!
   - Ex) 주문(Order)과 주문상품(OrderItem) 연관관계 
       - OrderItem에서 FK를 가지고 있기에 주인!
-         ```java
-	 // OrderItem가 주인이기에 JoinColumn으로 연결
+```java
+// OrderItem가 주인이기에 JoinColumn으로 연결
 
-	 @ManyToOne
-	 @JoinColumn(name = "item_id")
-	 private Item item;
-	 ```
-      - Order는 연관관계의 거울이기에 mappedBy 작성!
-      	 ```java
-	 @OneToMany(mappedBy = "orderItem")
-	 private List<OrderItem> orderItems = new ArrayList<>();
-	 ```
+@ManyToOne
+@JoinColumn(name = "item_id")
+private Item item;
+```
+
+```java
+// Order는 연관관계의 거울이기에 mappedBy 작성!
+
+@OneToMany(mappedBy = "orderItem")
+private List<OrderItem> orderItems = new ArrayList<>();
+```
 
 2. 값 타입(임베디드 타입) 사용
    - Address를 임베디드 타입으로 사용!
