@@ -23,7 +23,7 @@ public class Order {
     @JoinColumn(name = "member_id") // join을 무엇으로 할 것인지
     private Member member;
 
-    @OneToMany(mappedBy = "orderItem")
+    @OneToMany(mappedBy = "order")
     private List<OrderItem> orderItems = new ArrayList<>();
 
     @OneToOne

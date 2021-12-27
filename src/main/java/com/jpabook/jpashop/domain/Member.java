@@ -21,6 +21,6 @@ public class Member {
     @Embedded // 내장 타입
     private Address address;
 
-    @OneToMany(mappedBy = "order") // 하나의 회원이 여러개의 주문, 연관관계의 거울 ( == mappedBy)
+    @OneToMany(mappedBy = "member") // 하나의 회원이 여러개의 주문, 연관관계의 거울 ( == mappedBy)
     private List<Order> orders = new ArrayList<>();
 }
