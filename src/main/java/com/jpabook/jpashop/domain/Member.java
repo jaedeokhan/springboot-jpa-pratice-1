@@ -22,5 +22,5 @@ public class Member {
     private Address address;
 
     @OneToMany(mappedBy = "member") // 하나의 회원이 여러개의 주문, 연관관계의 거울 ( == mappedBy)
-    private List<Order> orders = new ArrayList<>();
+    private List<Order> orders = new ArrayList<>(); // 생성자보다 이 방법이 Best Practice
 }

@@ -15,7 +15,7 @@ public class OrderItem {
 	
 	// OrderItem이 주인이기에 JoinColumn으로 연결
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "item_id")
 	private Item item;
 
@@ -71,3 +71,19 @@ public class Order {
    - 위와 같이 @Setter는 제거! 
    - JPA 스펙상 엔티티나 임베디드 타입은 기본 생성자를 public 또는 protected로 설정!
       - public 보다는 protected로 조금 더 안전하게 사용!
+
+#### 엔티티 설계시 주의점
+
+1. @Setter 지양
+   - 변경 포인트가 많아져 유지 보수가 어려워 진다.
+
+2. 모든 연관계는 즉시(EAGER) X, 지연(LAZY) 로딩으로 할 것!
+   - EAGER로 하면 연관되어 있는 모든 쿼리가 다 불러와져서 추후에 JPQL 사용시 N + 1 문제가 발생!
+   - 연관된 엔티티를 조회해야하면 fetch join 또는 엔티티 그래프 기능사용
+   - @XToOne(OneToOne, ManyToOne)의 FetchType의 기본 값이 EAGER로 되어 있어 모두 LAZY로 수정!
+
+3. 컬렉션은 필드에서 초기화
+   - NPE에서 안전
+
+4. 테이블, 컬럼명 생성 전략
+   - 따로 설정해주지 않으면 엔티티(필드)는 카멜 케이스(MemberId) -> 테이블(컬럼)은 스네이크 케이스(member_id)로 설정
